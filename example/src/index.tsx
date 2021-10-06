@@ -1,14 +1,15 @@
 import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { sum } from '../../.'
+import { Provider } from 'react-redux'
+import { store } from './init'
+import { App } from './App'
 
-const App = () => {
-  return (
-    <div>
-      App example {sum(1, 2)}
-    </div>
-  )
-}
+const app = (
+  <Provider store={store}>
+    <App/>
+  </Provider>
+)
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+
+ReactDOM.render(app, document.getElementById('root'))
