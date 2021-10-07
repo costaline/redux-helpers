@@ -1,10 +1,11 @@
 import C from './constants'
+import { PostsAction, PostsState } from './types'
 
-const initialState = {
+const initialState: PostsState = {
   counter: 0,
 }
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: PostsAction) => {
   switch (action.type) {
     case C.INCREMENT_COUNTER:
       return {
@@ -22,6 +23,7 @@ export const reducer = (state = initialState, action) => {
       }
 
     default:
+      const missedAction: never = action;
       return state
   }
 }

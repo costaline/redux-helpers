@@ -7,4 +7,5 @@ import { rootReducer } from './rootReducer'
 const middlewares: Middleware[] = [thunk]
 const enhancer = composeWithDevTools(applyMiddleware(...middlewares))
 
+// @ts-ignore
 export const store = createStore(rootReducer, enhancer)
