@@ -5,7 +5,7 @@ const initialState: PostsState = {
   counter: 0,
 }
 
-export const reducer = (state = initialState, action: PostsAction) => {
+export const reducer = (state = initialState, action: PostsAction): PostsState => {
   switch (action.type) {
     case C.INCREMENT_COUNTER:
       return {
@@ -22,8 +22,13 @@ export const reducer = (state = initialState, action: PostsAction) => {
         ...state, counter: state.counter + action.payload,
       }
 
+    case C.ASYNC_SET_COUNTER_START:
+    case C.ASYNC_SET_COUNTER_SUCCESS:
+    case C.ASYNC_SET_COUNTER_FAILURE:
+      return state
+
     default:
-      const missedAction: never = action;
+      const missedAction: never = action
       return state
   }
 }
