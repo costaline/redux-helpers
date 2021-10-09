@@ -1,28 +1,30 @@
-import * as actions from './actions'
-import { ThunkAction } from 'redux-thunk'
+import { Immutable } from 'immer'
 import { Action } from 'redux'
+import { ThunkAction } from 'redux-thunk'
+
+import * as actions from './actions'
 import C from './constants'
 
-/* state */
-export interface PostsState {
-  counter: number
-}
+/* slice state */
+export type PostsState = Immutable<{
+  counter: number,
+  isPending: boolean
+}>
 
-/* payloads / errors */
+/* action payloads | errors */
 export type AddToCounterPayload = number
 export type AsyncSetCounterSuccessPayload = number
 export type AsyncSetCounterFailureError = string
 
-/* actions */
+/* slice actions */
 export type PostsAction = ReturnType<InferValue<typeof actions>>
 
-/* common */
+/* common thunk result for slice */
 type ThunkResult<R, A extends Action> = ThunkAction<R, PostsState, void, A>
 
-/* thunks */
-type ThunkAsyncSetCounterActions = Extract<PostsAction, Action<typeof C.ASYNC_SET_COUNTER_START
+/* thunk actions */
+export type ThunkAsyncSetCounter = ThunkResult<Promise<void>, Extract<PostsAction, Action<
+  | typeof C.ASYNC_SET_COUNTER_START
   | typeof C.ASYNC_SET_COUNTER_SUCCESS
-  | typeof C.ASYNC_SET_COUNTER_FAILURE>>
-
-export type ThunkAsyncSetCounter = ThunkResult<Promise<void>, ThunkAsyncSetCounterActions>
-
+  | typeof C.ASYNC_SET_COUNTER_FAILURE
+>>>
