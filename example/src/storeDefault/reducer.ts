@@ -1,14 +1,14 @@
 import { produce } from 'immer'
 
 import C from './constants'
-import { PostsAction, PostsState } from './types'
+import { StoreDefaultAction, StoreDefaultState } from './types'
 
-const initialState: PostsState = {
+const initialState: StoreDefaultState = {
   counter: 0,
   isPending: false,
 }
 
-export const reducer = produce((draft, action: PostsAction) => {
+export const reducer = produce((draft, action: StoreDefaultAction) => {
   switch (action.type) {
     case C.INCREMENT_COUNTER:
       draft.counter += 1

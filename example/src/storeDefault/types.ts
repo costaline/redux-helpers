@@ -6,7 +6,7 @@ import * as actions from './actions'
 import C from './constants'
 
 /* slice state */
-export type PostsState = Immutable<{
+export type StoreDefaultState = Immutable<{
   counter: number,
   isPending: boolean
 }>
@@ -17,13 +17,13 @@ export type AsyncSetCounterSuccessPayload = number
 export type AsyncSetCounterFailureError = string
 
 /* slice actions */
-export type PostsAction = ReturnType<InferValue<typeof actions>>
+export type StoreDefaultAction = ReturnType<InferValue<typeof actions>>
 
 /* common thunk result for slice */
-type ThunkResult<R, A extends Action> = ThunkAction<R, PostsState, void, A>
+type ThunkResult<R, A extends Action> = ThunkAction<R, StoreDefaultState, void, A>
 
 /* thunk actions */
-export type ThunkAsyncSetCounter = ThunkResult<Promise<void>, Extract<PostsAction, Action<
+export type ThunkAsyncSetCounter = ThunkResult<Promise<void>, Extract<StoreDefaultAction, Action<
   | typeof C.ASYNC_SET_COUNTER_START
   | typeof C.ASYNC_SET_COUNTER_SUCCESS
   | typeof C.ASYNC_SET_COUNTER_FAILURE

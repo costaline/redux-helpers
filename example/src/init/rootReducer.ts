@@ -1,9 +1,9 @@
 import { Action, combineReducers } from 'redux'
-import { postsReducer } from '../store'
+import { storeDefaultReducer } from '../storeDefault'
 import { AppState } from './types'
 
 export const combinedReducer = combineReducers({
-  posts: postsReducer
+  storeDefault: storeDefaultReducer
 })
 
 /* https://stackoverflow.com/a/35641992 */

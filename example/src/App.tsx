@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { selectCounter } from './store/selectors'
+import { selectCounter } from './storeDefault/selectors'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCounter, decrementCounter, incrementCounter } from './store'
+import { addToCounter, decrementCounter, incrementCounter } from './storeDefault'
 
 export const App = () => {
   const dispatch = useDispatch()
