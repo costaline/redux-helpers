@@ -1,6 +1,7 @@
 import { Immutable } from 'immer'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
+import { Waiting } from '@@lib'
 
 import * as actions from './actions'
 import C from './constants'
@@ -8,7 +9,7 @@ import C from './constants'
 /* slice state */
 export type StoreWithHelpersState = Immutable<{
   counter: number,
-  isPending: boolean
+  waiting: Waiting
 }>
 
 /* action payloads | errors */

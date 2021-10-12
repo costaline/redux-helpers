@@ -5,6 +5,7 @@ import {
   decrementCounter,
   incrementCounter,
   selectCounter,
+  asyncSetCounter,
 } from './storeWithHelpers'
 
 export const AppWithHelpers = () => {
@@ -13,10 +14,13 @@ export const AppWithHelpers = () => {
 
   return <div style={{backgroundColor: '#282828', padding: '50px'}}>
     <h2>WITH HELPERS</h2>
-    <div>COUNTER: {counter}</div>
+    <div>COUNTER: {counter.data}</div>
     <div>
       <button onClick={() => dispatch(decrementCounter())}>dec</button>
       <button onClick={() => dispatch(addToCounter(10))}>add 10</button>
+      <button disabled={counter.isPending}
+              onClick={() => dispatch(asyncSetCounter())}>async 42
+      </button>
       <button onClick={() => dispatch(incrementCounter())}>inc</button>
     </div>
   </div>

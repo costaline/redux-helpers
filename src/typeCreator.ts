@@ -1,7 +1,4 @@
-type ActionStatus = 'start' | 'success' | 'failure'
-
-type Template<Slice extends string, Action extends string> = `${Slice} [${Action}]`
-type TemplateWithStatus<Slice extends string, Action extends string, Status extends ActionStatus> = `${Template<Slice, Action>} ${Status}`
+import { ActionStatus, TemplateWithStatus, Template } from './types'
 
 export const typeCreator = <Slice extends string>(slice: Slice) => {
   function createType<Action extends string, Status extends ActionStatus>(action: Action, status: Status): TemplateWithStatus<Slice, Action, Status>
