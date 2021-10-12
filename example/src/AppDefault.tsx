@@ -1,13 +1,18 @@
 import * as React from 'react'
 import { selectCounter } from './storeDefault/selectors'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCounter, decrementCounter, incrementCounter } from './storeDefault'
+import {
+  addToCounter,
+  decrementCounter,
+  incrementCounter,
+} from './storeDefault'
 
-export const App = () => {
+export const AppDefault = () => {
   const dispatch = useDispatch()
   const counter = useSelector(selectCounter)
 
-  return <div>
+  return <div style={{backgroundColor: '#222222', padding: '50px'}}>
+    <h2>DEFAULT</h2>
     <div>COUNTER: {counter}</div>
     <div>
       <button onClick={() => dispatch(decrementCounter())}>dec</button>

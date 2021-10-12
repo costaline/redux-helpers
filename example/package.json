@@ -7,6 +7,9 @@
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
+  "alias": {
+    "@@lib": "../dist"
+  },
   "dependencies": {
     "immer": "^9.0.6",
     "parcel": "^2.0.0-rc.0",
@@ -19,7 +22,6 @@
     "redux-thunk": "^2.3.0",
     "scheduler": "^0.20.2"
   },
-  "alias": {},
   "devDependencies": {
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.8.4",
