@@ -27,3 +27,5 @@ export type SliceAction = ActionSimple | ActionPayload | ActionError
 
 /**/
 export type Waiting = string[]
+
+export type Errors<E = unknown> = Record<string, E>

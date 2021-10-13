@@ -23,5 +23,9 @@ export const AppWithHelpers = () => {
       </button>
       <button onClick={() => dispatch(incrementCounter())}>inc</button>
     </div>
+    {counter.error && (<>
+      <br/>
+      <pre style={{color: 'red'}}>{counter.error}</pre>
+    </>)}
   </div>
 }

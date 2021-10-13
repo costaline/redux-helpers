@@ -11,7 +11,12 @@ export const asyncSetCounter = (): ThunkAsyncSetCounter => async (dispatch) => {
 
   try {
     await new Promise(resolve => setTimeout(resolve, 1000))
-    dispatch(asyncSetCounterSuccess(42))
+
+    if(Math.random() < 3/4) {
+      dispatch(asyncSetCounterSuccess(42))
+    } else {
+      throw new Error('Something went wrong')
+    }
   } catch (error) {
     dispatch(asyncSetCounterFailure((error as Error)?.toString()))
   }

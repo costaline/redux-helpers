@@ -1,3 +1,4 @@
 export * from './typeCreator'
 export * from './waiting'
-export { Waiting } from './types'
+export { Waiting, Errors } from './types'
+export * from './errors'

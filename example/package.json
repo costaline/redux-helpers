@@ -8,7 +8,7 @@
     "build": "parcel build index.html"
   },
   "alias": {
-    "@@lib": "../."
+    "@@lib": "../dist"
   },
   "dependencies": {
     "immer": "^9.0.6",

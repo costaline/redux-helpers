@@ -1,5 +1,5 @@
 import { produce,  } from 'immer'
-import { updateWaiting } from '@@lib'
+import { updateWaiting, updateErrors } from '@@lib'
 
 import C from './constants'
 import { StoreWithHelpersAction, StoreWithHelpersState } from './types'
@@ -7,6 +7,7 @@ import { StoreWithHelpersAction, StoreWithHelpersState } from './types'
 const initialState: StoreWithHelpersState = {
   counter: 0,
   waiting: [],
+  errors: {}
 }
 
 export const reducer = produce((draft, action: StoreWithHelpersAction) => {
@@ -22,6 +23,7 @@ export const reducer = produce((draft, action: StoreWithHelpersAction) => {
       break
     case C.ASYNC_SET_COUNTER_START:
       draft.waiting = updateWaiting(draft.waiting, action)
+      draft.errors = updateErrors(draft.errors, action)
       break
     case C.ASYNC_SET_COUNTER_SUCCESS:
       draft.waiting = updateWaiting(draft.waiting, action)
@@ -29,6 +31,7 @@ export const reducer = produce((draft, action: StoreWithHelpersAction) => {
       break
     case C.ASYNC_SET_COUNTER_FAILURE:
       draft.waiting = updateWaiting(draft.waiting, action)
+      draft.errors = updateErrors(draft.errors, action)
       break
     default:
       const missedAction: never = action
