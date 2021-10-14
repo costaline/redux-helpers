@@ -1,15 +1,20 @@
+import {produce} from 'immer'
+
 import { ActionStatus, SliceAction, TemplateWithStatus, Waiting } from './types'
 import { parseType } from './utils'
-
 
 const add = (waiting: Waiting, commonType: string): Waiting => {
   if (waiting.includes(commonType)) return waiting
 
-  return [...waiting, commonType]
+  return produce(waiting, draft => {
+    draft.push(commonType)
+  })
 }
 
 const remove = (waiting: Waiting, commonType: string): Waiting => {
-  return waiting.filter((e) => e !== commonType)
+  return produce(waiting, draft => {
+   return draft.filter(w => w !== commonType)
+  })
 }
 
 export const updateWaiting = (waiting: Waiting, action: SliceAction): Waiting => {
