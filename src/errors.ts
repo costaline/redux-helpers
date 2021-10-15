@@ -1,4 +1,4 @@
-import { produce } from 'immer'
+import { produce, castDraft } from 'immer'
 
 import {
   ActionError,
@@ -11,9 +11,7 @@ import { parseType } from './utils'
 
 const add = <E>(errors: Errors<E>, type: string, error: E): Errors<E> => {
   return produce(errors, draft => {
-    // TODO: fix
-    // @ts-ignore
-    draft[type] = error
+    draft[type] = castDraft(error)
   })
 };
 
