@@ -29,3 +29,12 @@ export type SliceAction = ActionSimple | ActionPayload | ActionError
 export type Waiting = string[]
 
 export type Errors<E = unknown> = Record<string, E>
+
+/**/
+interface MetaKey<K = string | number> {
+  key: K
+}
+// TODO: generic
+export interface MetaPayload extends MetaKey {}
+
+export type WaitingWithMeta = Array<string | [string, MetaPayload]>
