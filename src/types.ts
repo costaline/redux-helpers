@@ -13,7 +13,9 @@ export interface ParsedType {
 }
 
 /**/
-export type ActionSimple = Action
+export interface ActionSimple extends Action {
+  meta?: MetaPayload
+}
 
 export interface ActionPayload<P = unknown> extends ActionSimple {
   payload: P
