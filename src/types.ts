@@ -40,3 +40,10 @@ interface MetaKey<K = string | number> {
 export interface MetaPayload extends MetaKey {}
 
 export type WaitingWithMeta = Array<string | [string, MetaPayload]>
+
+export interface ErrorMetaPayload<E> {
+  error: E,
+  meta: MetaPayload
+}
+
+export type ErrorsWithMeta<E = unknown> = Record<string, E> | Record<string, Array<ErrorMetaPayload<E>>>
