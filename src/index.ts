@@ -1,4 +1,6 @@
 export * from './typeCreator'
-export { WaitingWithMeta, Errors } from './types'
-export * from './errors'
+export {
+  WaitingWithMeta, Errors, ErrorsWithMeta, ErrorMetaPayload,
+} from './types'
 export * from './waitingWithMeta'
+export * from './errorsWithMeta'

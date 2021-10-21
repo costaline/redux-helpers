@@ -1,7 +1,7 @@
 import { Immutable } from 'immer'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
-import { Errors, WaitingWithMeta } from '@@lib'
+import { WaitingWithMeta, ErrorsWithMeta } from '@@lib'
 
 import * as actions from './actions'
 import C from './constants'
@@ -10,7 +10,7 @@ import C from './constants'
 export type StoreWithHelpersState = Immutable<{
   counter: number,
   waiting: WaitingWithMeta,
-  errors: Errors<string>
+  errors: ErrorsWithMeta<string>
 }>
 
 /* action payloads | errors */
