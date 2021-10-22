@@ -1,5 +1,5 @@
-import { produce,  } from 'immer'
-import { updateWaiting, updateErrorsWithMeta } from '@@lib'
+import { produce} from 'immer'
+import { updateWaiting, updateErrors } from '@@lib'
 
 import C from './constants'
 import { StoreWithHelpersAction, StoreWithHelpersState } from './types'
@@ -23,7 +23,7 @@ export const reducer = produce((draft, action: StoreWithHelpersAction) => {
       break
     case C.ASYNC_SET_COUNTER_START:
       draft.waiting = updateWaiting(draft.waiting, action)
-      draft.errors = updateErrorsWithMeta(draft.errors, action)
+      draft.errors = updateErrors(draft.errors, action)
       break
     case C.ASYNC_SET_COUNTER_SUCCESS:
       draft.waiting = updateWaiting(draft.waiting, action)
@@ -31,7 +31,7 @@ export const reducer = produce((draft, action: StoreWithHelpersAction) => {
       break
     case C.ASYNC_SET_COUNTER_FAILURE:
       draft.waiting = updateWaiting(draft.waiting, action)
-      draft.errors = updateErrorsWithMeta(draft.errors, action)
+      draft.errors = updateErrors(draft.errors, action)
       break
     default:
       const missedAction: never = action

@@ -24,6 +24,7 @@ const addWithMeta = <E>(errors: ErrorsWithMeta<E>, type: string, error: E, meta:
       if (!isExists) {
         errorsByType.push(castDraft({ error, meta }))
       }
+    } else {
     }
 
     // TODO: else case
@@ -46,7 +47,7 @@ const removeWithMeta = <E>(errors: ErrorsWithMeta<E>, type: string, meta: MetaPa
   })
 }
 
-export const updateErrorsWithMeta = <E>(errors: ErrorsWithMeta<E>, action: SliceAction): ErrorsWithMeta<E> => {
+export const updateErrors = <E>(errors: ErrorsWithMeta<E>, action: SliceAction): ErrorsWithMeta<E> => {
   const { commonType, mode } = parseType(action.type)
 
   if (!!action.meta) {
