@@ -46,4 +46,8 @@ export interface ErrorMetaPayload<E> {
   meta: MetaPayload
 }
 
-export type ErrorsWithMeta<E = unknown> = Record<string, E> | Record<string, Array<ErrorMetaPayload<E>>>
+export type SimpleErrors<E> = Record<string, E>
+export type MetaErrors<E> = Record<string, Array<ErrorMetaPayload<E>>>
+export type MixedErrors<E> = Record<string, Array<E | ErrorMetaPayload<E>>>
+
+export type ErrorsWithMeta<E = unknown> = SimpleErrors<E> | MetaErrors<E> | MixedErrors<E>
