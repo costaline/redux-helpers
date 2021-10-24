@@ -28,16 +28,13 @@ export interface ActionError<E = unknown> extends ActionSimple {
 export type SliceAction = ActionSimple | ActionPayload | ActionError
 
 /**/
-export type Waiting = string[]
-
-export type Errors<E = unknown> = Record<string, E>
-
-/**/
 interface MetaKey<K = string | number> {
   key: K
 }
+
 // TODO: generic
-export interface MetaPayload extends MetaKey {}
+export interface MetaPayload extends MetaKey {
+}
 
 export type WaitingWithMeta = Array<string | [string, MetaPayload]>
 
@@ -46,8 +43,9 @@ export interface ErrorMetaPayload<E> {
   meta: MetaPayload
 }
 
-export type SimpleErrors<E> = Record<string, E>
-export type MetaErrors<E> = Record<string, Array<ErrorMetaPayload<E>>>
-export type MixedErrors<E> = Record<string, Array<E | ErrorMetaPayload<E>>>
+export type SimpleError<E> = E
+export type MetaError<E> = ErrorMetaPayload<E>
+export type MixedError<E> = SimpleError<E> | MetaError<E>
+export type ErrorType<E> = SimpleError<E> | Array<MixedError<E>>
 
-export type ErrorsWithMeta<E = unknown> = SimpleErrors<E> | MetaErrors<E> | MixedErrors<E>
+export type Errors<E = unknown> = Record<string, ErrorType<E>>

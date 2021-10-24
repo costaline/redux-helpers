@@ -3,24 +3,24 @@ import produce, { castDraft, Immutable } from 'immer'
 import { parseType } from './utils'
 import {
   ActionError, ActionStatus, ErrorMetaPayload,
-  ErrorsWithMeta,
+  Errors, ErrorType, MetaError,
   MetaPayload,
   SliceAction,
   TemplateWithStatus,
 } from './types'
 
-const add = <E>(errors: ErrorsWithMeta<E>, type: string, error: E): ErrorsWithMeta<E> => {
+const add = <E>(errors: Errors<E>, type: string, error: E): Errors<E> => {
   return produce(errors, draft => {
     draft[type] = castDraft(error)
   })
 }
 
-const addWithMeta = <E>(errors: ErrorsWithMeta<E>, type: string, error: E, meta: MetaPayload): ErrorsWithMeta<E> => {
+const addWithMeta = <E>(errors: Errors<E>, type: string, error: E, meta: MetaPayload): Errors<E> => {
   return produce(errors, draft => {
     const errorsByType = draft[type] || []
 
     if (Array.isArray(errorsByType)) {
-      const isExists = !!(errorsByType as Array<ErrorMetaPayload<E>>).find(item => {
+      const isExists = !!(errorsByType as Array<MetaError<E>>).find(item => {
         const key = item?.meta?.key
 
         return !!key && key === meta.key
@@ -36,13 +36,13 @@ const addWithMeta = <E>(errors: ErrorsWithMeta<E>, type: string, error: E, meta:
   })
 }
 
-const remove = <E>(errors: ErrorsWithMeta<E>, type: string): ErrorsWithMeta<E> => {
+const remove = <E>(errors: Errors<E>, type: string): Errors<E> => {
   return produce(errors, draft => {
     delete draft[type]
   })
 }
 
-const removeWithMeta = <E>(errors: ErrorsWithMeta<E>, type: string, meta: MetaPayload): ErrorsWithMeta<E> => {
+const removeWithMeta = <E>(errors: Errors<E>, type: string, meta: MetaPayload): Errors<E> => {
   return produce(errors, draft => {
     const errorsByType = draft[type]
 
@@ -57,7 +57,7 @@ const removeWithMeta = <E>(errors: ErrorsWithMeta<E>, type: string, meta: MetaPa
   })
 }
 
-export const updateErrors = <E>(errors: ErrorsWithMeta<E>, action: SliceAction): ErrorsWithMeta<E> => {
+export const updateErrors = <E>(errors: Errors<E>, action: SliceAction): Errors<E> => {
   const { commonType, mode } = parseType(action.type)
 
   if (!!action.meta) {
@@ -82,13 +82,13 @@ export const updateErrors = <E>(errors: ErrorsWithMeta<E>, action: SliceAction):
   }
 }
 
-export const getError = <E>(errors: Immutable<ErrorsWithMeta<E>>, type: TemplateWithStatus<string, string, ActionStatus>): Immutable<E | Array<E | ErrorMetaPayload<E>>> => {
+export const getError = <E>(errors: Immutable<Errors<E>>, type: TemplateWithStatus<string, string, ActionStatus>): Immutable<ErrorType<E>> => {
   const { commonType } = parseType(type)
 
   return errors[commonType]
 }
 
-export const getErrorWithMeta = <E>(errors: Immutable<ErrorsWithMeta<E>>, type: TemplateWithStatus<string, string, ActionStatus>): Immutable<E | Array<E | ErrorMetaPayload<E>>> => {
+export const getErrorWithMeta = <E>(errors: Immutable<Errors<E>>, type: TemplateWithStatus<string, string, ActionStatus>): Immutable<ErrorType<E>> => {
   const { commonType } = parseType(type)
 
   return errors[commonType] || []
