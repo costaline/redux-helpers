@@ -36,7 +36,7 @@ interface MetaKey<K = string | number> {
 export interface MetaPayload extends MetaKey {
 }
 
-export type WaitingWithMeta = Array<string | [string, MetaPayload]>
+export type Waiting = Array<string | [string, MetaPayload]>
 
 export interface ErrorMetaPayload<E> {
   error: E,

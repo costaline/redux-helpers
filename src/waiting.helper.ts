@@ -5,11 +5,11 @@ import {
   MetaPayload,
   SliceAction,
   TemplateWithStatus,
-  WaitingWithMeta,
+  Waiting,
 } from './types'
 import { parseType } from './utils'
 
-const add = (waiting: WaitingWithMeta, commonType: string): WaitingWithMeta => {
+const add = (waiting: Waiting, commonType: string): Waiting => {
   if (waiting.includes(commonType)) return waiting
 
   return produce(waiting, draft => {
@@ -17,7 +17,7 @@ const add = (waiting: WaitingWithMeta, commonType: string): WaitingWithMeta => {
   })
 }
 
-const addWithMeta = (waiting: WaitingWithMeta, commonType: string, meta: MetaPayload): WaitingWithMeta => {
+const addWithMeta = (waiting: Waiting, commonType: string, meta: MetaPayload): Waiting => {
   const isExists = !!waiting.find((item) => {
     if (Array.isArray(item)) {
       const [w, { key }] = item
@@ -35,13 +35,13 @@ const addWithMeta = (waiting: WaitingWithMeta, commonType: string, meta: MetaPay
   })
 }
 
-const remove = (waiting: WaitingWithMeta, commonType: string): WaitingWithMeta => {
+const remove = (waiting: Waiting, commonType: string): Waiting => {
   return produce(waiting, draft => {
     return draft.filter(w => w !== commonType)
   })
 }
 
-const removeWithMeta = (waiting: WaitingWithMeta, commonType: string, meta: MetaPayload): WaitingWithMeta => {
+const removeWithMeta = (waiting: Waiting, commonType: string, meta: MetaPayload): Waiting => {
   try {
     return produce(waiting, draft => {
       return draft.filter((item) => {
@@ -63,7 +63,7 @@ const removeWithMeta = (waiting: WaitingWithMeta, commonType: string, meta: Meta
   }
 }
 
-export const updateWaiting = (waiting: WaitingWithMeta, action: SliceAction): WaitingWithMeta => {
+export const updateWaiting = (waiting: Waiting, action: SliceAction): Waiting => {
   const { commonType, mode } = parseType(action.type)
 
   if (!!action.meta) {
@@ -89,7 +89,7 @@ export const updateWaiting = (waiting: WaitingWithMeta, action: SliceAction): Wa
   }
 }
 
-export const getWaitingWithMeta = (waiting: Immutable<WaitingWithMeta>, type: TemplateWithStatus<string, string, ActionStatus>): Immutable<WaitingWithMeta> => {
+export const getWaitingWithMeta = (waiting: Immutable<Waiting>, type: TemplateWithStatus<string, string, ActionStatus>): Immutable<Waiting> => {
   const { commonType } = parseType(type)
 
   return waiting.filter((item) => {
@@ -103,7 +103,7 @@ export const getWaitingWithMeta = (waiting: Immutable<WaitingWithMeta>, type: Te
   })
 }
 
-export const getWaitingStatus = (waiting: Immutable<WaitingWithMeta>, type: TemplateWithStatus<string, string, ActionStatus>): boolean => {
+export const getWaitingStatus = (waiting: Immutable<Waiting>, type: TemplateWithStatus<string, string, ActionStatus>): boolean => {
   const {commonType} = parseType(type)
 
   return waiting.includes(commonType)

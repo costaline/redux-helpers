@@ -1,6 +1,6 @@
 export * from './typeCreator'
 export {
-  WaitingWithMeta,
+  Waiting,
   Errors,
   ErrorMetaPayload,
   SimpleError,
